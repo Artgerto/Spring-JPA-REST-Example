@@ -20,11 +20,11 @@ public class ApartmentPriceStatsController {
    ApartmentPriceStatsRepository apartmentPriceStatsRepository;
 
     @RequestMapping(value = "/apart/prognosis/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    ResponseEntity<?> getStats(@PathVariable Long id) {
+    List<ApartmentPriceStats> getStats(@PathVariable Long id) {
         List<ApartmentPriceStats> apartmentPriceStatsList = apartmentPriceStatsRepository.findByIdApartment(id);
         if(apartmentPriceStatsList.size() == 0){
             throw new ResourceNotFoundException(id);
         }
-        return new ResponseEntity(apartmentPriceStatsList, HttpStatus.OK);
+        return apartmentPriceStatsList;
     }
 }
